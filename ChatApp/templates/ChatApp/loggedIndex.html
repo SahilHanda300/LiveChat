@@ -1,0 +1,46 @@
+{% load static %}
+{% load static tailwind_tags %} {% include 'ChatApp/loggedNav.html' %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+    <title>Document</title>
+    {% tailwind_css %}
+  </head>
+  <body>
+    <h3 class="text-center lg:text-lg">Chat Groups</h3>
+    <div class="container block lg:grid grid-cols-3 text-center text-5xl gap-44 mt-4">
+      <div class="lg:mt-0">
+      <a href="/">🎥</a>
+    </div>
+      <div class="mt-12 lg:mt-0">
+      <a href="{% url 'jobChat' %}">🙋‍♂️</a>
+    </div>
+      <div class="mt-12 lg:mt-0 ">
+      <a href="{% url 'vehicalChat' %}">🚗</a>
+    </div>
+    <div class="mt-12 lg:mt-0 ">
+      <a href="{% url 'writers' %}">🖋️</a>
+    </div>
+    <div class="mt-12 lg:mt-0 ">
+      <a href="{% url 'friends' %}">🤝🏼</a>
+    </div>
+    <div class="mt-12 lg:mt-0 ">
+      <a href="{% url 'bodyBuilding' %}">💪</a>
+    </div>
+    <div class="mt-12 lg:mt-0 ">
+      <a href="{% url 'multimedia' %}">💾</a>
+    </div>
+    <div class="mt-12 lg:mt-0 ">
+      <a href="{% url 'medico' %}">💉</a> 
+    </div>
+    <div class="mt-12 p-10 lg:mt-0 lg:p-0">
+      <a href="{% url 'techno' %}">💻</a>
+    </div>
+    </div>
+    
+  </body>
+</html>
+{% include 'ChatApp/footer.html' %}

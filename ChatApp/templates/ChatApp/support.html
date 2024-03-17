@@ -1,0 +1,55 @@
+{% load static %}
+{% load static tailwind_tags %} {% include 'ChatApp/navbar.html' %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    {% tailwind_css %}
+    <title>Document</title>
+  </head>
+  <body class="bg-blue-600">
+    <div class="main lg:my-36">
+      <div class="row block mt-5 lg:flex justify-around">
+        <div class="text text-center text-xl">
+          <h3 class="italic">Contact Us</h3>
+          <h3>
+            Fill Up the Form and our representative <br />
+            will be in touch with you via your mail <br />
+            Note : Service is available Monday - Friday <br />
+            24*7
+          </h3>
+        </div>
+
+        <form
+          action={% url 'supportSubmit' %}
+          class="text-center mt-14 lg:mt-0"
+          method="post"
+          onsubmit="return validateSupportForm()"
+        >
+        {% csrf_token %}
+          <label for="">Your Name : </label> <br />
+          <input type="text" name="name" id="" class="h-5 name"/> <br />
+          <label for="">Your Email : </label> <br />
+          <input type="email" name="email" id="" class="h-5 email" /> <br />
+          <label for="">Your Phone Number : </label> <br />
+          <input type="tel" name="phone" id="" class="h-5 phone" /> <br />
+          <label for="">Your Query Title: </label> <br />
+          <input type="text" name="query" id="" class="h-5 query" /> <br />
+          <input
+            type="submit"
+            value="Submit Query"
+            class="bg-blue-400 p-1 mt-6 rounded-lg cursor-pointer lg:mt-2 submitBtn"
+          />
+        </form>
+      </div>
+
+      <div class="flex justify-around p-4 ">
+       <h3 class="m-4 formValidate bg-red-600 text-center rounded-md w-auto"></h3>
+      </div>
+    </div>
+
+    <script src="{% static 'js/supportValidation.js' %}"></script>
+  </body>
+  {% include 'ChatApp/footer.html' %}
+</html>

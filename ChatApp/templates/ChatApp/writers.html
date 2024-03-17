@@ -1,0 +1,29 @@
+{% load static %}
+{% load static tailwind_tags %} {% include 'ChatApp/loggedNav.html' %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="{% static 'main.css' %}">
+    <title>Document</title>
+    {% tailwind_css %}
+  </head>
+  <body>
+      <div class="container flex flex-col items-center">
+        <div class="show-chat h-[32rem] w-full bg-blue-700 overflow-y-auto ">
+  
+        </div>
+        <div class="input w-full text-center mt-5">
+          <input type="text" name="" id="" class="h-3/6 w-full text-center text" placeholder="Write Something Exciting..">
+        </div>
+        <input type="button" value="Send Message" class=" p-1 bg-blue-500 rounded-lg submit mt-2">
+    
+        <div class="mt-2 p-10">
+          <a href="{% url 'loggedIndex' %}">Go Back</a>
+        </div>
+      </div>
+  </body>
+  <script src="{% static 'js/writers.js' %}"></script>
+</html>
+{% include 'ChatApp/footer.html' %}
