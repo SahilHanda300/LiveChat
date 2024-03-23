@@ -7,7 +7,7 @@ urlpatterns=[
     path('support/',views.support,name="support"),
     path('register/',views.register,name="register"),
     path('login/',views.loginPage,name="login"),
-    path('supportSupport/',views.submittedSupport,name="supportSubmit"),
+    path('supportSubmit/',views.submittedSupport,name="supportSubmit"),
     
     
     path("loggedUser/",views.loggedInPage),

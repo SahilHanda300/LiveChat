@@ -15,15 +15,73 @@
   
         </div>
         <div class="input w-full text-center mt-5">
-          <input type="text" name="" id="" class="h-3/6 w-full text-center text" placeholder="Get Your Job Opportunities..">
+          <input type="text" name="" id="" class="h-3/6 w-full text-center text " placeholder="Get Your Job Opportunities..">
         </div>
-        <input type="button" value="Send Message" class=" p-1 bg-blue-500 rounded-lg submit mt-2">
+        
+        <input type="button" value="Send Message" class=" p-1 bg-blue-500 rounded-lg submit mt-2" >
     
         <div class="mt-2 p-10">
           <a href="{% url 'loggedIndex' %}">Go Back</a>
         </div>
       </div>
   </body>
-  <script src="{% static 'js/jobChat.js' %}"></script>
+  <script>
+    
+
+let ws = new WebSocket(`ws://${window.location.host}/ws/sc/jobChat/`)
+ws.onopen = function(){
+  
+}
+let sendBtn = document.querySelector(".submit")
+let userInp = document.querySelector(".text")
+
+
+
+sendBtn.addEventListener('click',function(){
+  let val = userInp.value
+  ws.send(JSON.stringify({
+    'msg':val,
+  }))
+  
+})
+
+
+
+
+
+ws.onmessage = function(event){
+  let showChat = document.querySelector(".show-chat")
+  let msg = JSON.parse(event.data)
+
+  if (msg.msg === userInp.value) {
+    if(msg.msg=="" || userInp.value==""){
+      console.log("Cannot Send Empty Messages")
+    }
+    else{
+    showChat.innerHTML+=`
+    <div class="bg-blue-200 rounded-md w-32 float-right clear-both mb-5 p-2">
+        <h3 class="">${msg.msg}</h3>
+    </div>    
+    `
+  }
+    userInp.value=""
+  }
+  
+  else{
+    showChat.innerHTML+=`
+    <div class="bg-blue-200 rounded-md w-32 clear-both mb-5 ">
+        <h3 class="relative top-2">${msg.msg}</h3> <br>
+    </div>    
+    `
+    
+  }
+  
+  
+  
+
+}
+
+
+  </script>
 </html>
 {% include 'ChatApp/footer.html' %}

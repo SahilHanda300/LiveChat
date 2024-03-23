@@ -1,7 +1,7 @@
-from typing import Any
+from ChatApp.models import SupportForm
 from django.contrib.auth.forms import UserChangeForm,UserCreationForm
 from django.contrib.auth.models import User
-
+from django import forms
 
 class RegisterForm(UserCreationForm):
     class Meta:
@@ -13,3 +13,4 @@ class EditProfile(UserChangeForm):
     class Meta:
         model=User
         fields=["username","first_name","last_name"]
+

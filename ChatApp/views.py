@@ -8,7 +8,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate,login,logout,update_session_auth_hash
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import AuthenticationForm , PasswordChangeForm , UserChangeForm
-from .forms import RegisterForm , EditProfile
+from .forms import RegisterForm , EditProfile 
 
 # Create your views here.
 
@@ -35,7 +35,7 @@ def submittedSupport(req):
         # Saving to Database
         supportForm = SupportForm.objects.create(name=name,email=email,phoneNumber=phone,queryTitle=query)
         supportForm.save()
-
+        print("Created")
         # Sending Email
         subject="Hey from LiveChat"
         message = f"Hey {name} , we have got your query and are working on it . As soon we are finished with your query , we will get in touch with you with this email !"
@@ -95,10 +95,6 @@ def loggedInPage(req):
     return render(req,"ChatApp/loggedIndex.html")
 
 def userProfile(req):
-    import openai
-    openai.ChatCompletion.create(
-        
-    )
     if req.method == "POST":
         user = EditProfile(req.POST, instance=req.user)
         if user.is_valid():
