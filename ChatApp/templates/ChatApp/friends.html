@@ -28,14 +28,16 @@
     
 
     let ws = new WebSocket(`ws://${window.location.host}/ws/sc/friends/`)
+    let audio = new Audio()
+    audio.src = "{% static 'audio/ting.mp3' %}"
+    
     ws.onopen = function(){
-      
+      audio.preload="auto"
     }
     let sendBtn = document.querySelector(".submit")
     let userInp = document.querySelector(".text")
     
-    
-    
+   
     sendBtn.addEventListener('click',function(){
       let val = userInp.value
       ws.send(JSON.stringify({
@@ -44,8 +46,13 @@
       
     })
     
-    
-    
+    async function playAudio(){
+      try{
+      await audio.play()
+    } catch(err){
+      console.log("Audio Error : ",err)
+    }
+  }
     
     
     ws.onmessage = function(event){
@@ -72,7 +79,7 @@
             <h3 class="relative top-2">${msg.msg}</h3> <br>
         </div>    
         `
-        
+        playAudio()
       }
     }
     

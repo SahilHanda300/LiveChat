@@ -26,10 +26,12 @@
   </body>
   <script>
     
+    let audio = new Audio()
+    audio.src = "{% static 'audio/ting.mp3' %}"
 
     let ws = new WebSocket(`ws://${window.location.host}/ws/sc/medico/`)
     ws.onopen = function(){
-      
+      audio.preload="auto"
     }
     let sendBtn = document.querySelector(".submit")
     let userInp = document.querySelector(".text")
@@ -44,7 +46,13 @@
       
     })
     
-    
+    async function audioPlay(){
+      try{
+      await audio.play()
+      } catch(err){
+        console.log("Audio Error : ",err)
+      }
+    }
     
     
     
@@ -72,6 +80,7 @@
             <h3 class="relative top-2">${msg.msg}</h3> <br>
         </div>    
         `  
+        audioPlay()
       }
       
     }

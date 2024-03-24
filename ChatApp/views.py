@@ -112,6 +112,7 @@ def logoutWebsite(req):
 def loggedIndex(req):
     return render(req,"ChatApp/loggedIndex.html")
 
+
 def jobChat(req):
     return render(req,"ChatApp/jobChat.html")
 

@@ -8,7 +8,7 @@ class ChatAppConsumer(AsyncConsumer):
             'type':'websocket.accept'
         })
     async def websocket_receive(self,event):
-         print(event)
+         
          await self.channel_layer.group_send(self.group,{
              'type':'chat.messages',
              'message':event['text']

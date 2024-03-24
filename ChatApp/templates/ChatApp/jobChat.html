@@ -59,6 +59,7 @@ async function audioPlay(){
   }
 }
 
+
 ws.onopen = function(){
   audio.preload="auto"
 }
@@ -90,9 +91,6 @@ ws.onmessage = function(event){
     
   }
 }
-document.addEventListener('DOMContentLoaded', function() {
-  audioPlay();
-});
 
   </script>
 </html>

@@ -26,10 +26,12 @@
   </body>
   <script>
     
+    let audio = new Audio()
+    audio.src = "{% static 'audio/ting.mp3' %}"
 
     let ws = new WebSocket(`ws://${window.location.host}/ws/sc/multimedia/`)
     ws.onopen = function(){
-      
+      audio.preload="auto"
     }
     let sendBtn = document.querySelector(".submit")
     let userInp = document.querySelector(".text")
@@ -45,7 +47,13 @@
     })
     
     
-    
+    async function audioPlay(){
+      try{
+      await audio.play()
+      } catch(err){
+        console.log("Audio Error : ",err)
+      }
+    }
     
     
     ws.onmessage = function(event){
@@ -63,16 +71,17 @@
         </div>    
         `
       }
-        userInp.value=""
-      }
+      userInp.value=""
+    }
+    
+    else{
+      showChat.innerHTML+=`
+      <div class="bg-blue-200 rounded-md w-32 clear-both mb-5 ">
+        <h3 class="relative top-2">${msg.msg}</h3> <br>
+      </div>    
+      `
       
-      else{
-        showChat.innerHTML+=`
-        <div class="bg-blue-200 rounded-md w-32 clear-both mb-5 ">
-            <h3 class="relative top-2">${msg.msg}</h3> <br>
-        </div>    
-        `
-        
+      audioPlay()
       }
     }
       </script>
