@@ -50,6 +50,7 @@ let audio = new Audio()
 audio.src = audioPath;
 
 
+
 async function audioPlay(){
   try{
   await audio.play()
@@ -90,7 +91,7 @@ ws.onmessage = function(event){
   }
 }
 document.addEventListener('DOMContentLoaded', function() {
-  playAudio();
+  audioPlay();
 });
 
   </script>
