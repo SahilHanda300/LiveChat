@@ -46,44 +46,52 @@ sendBtn.addEventListener('click',function(){
   
 })
 
+let audio = new Audio()
+audio.src = audioPath;
 
 
+async function audioPlay(){
+  try{
+  await audio.play()
+  } catch(err){
+    console.log("Audio error : ",err)
+  }
+}
 
-
+ws.onopen = function(){
+  audio.preload="auto"
+}
 ws.onmessage = function(event){
   let showChat = document.querySelector(".show-chat")
   let msg = JSON.parse(event.data)
-
   if (msg.msg === userInp.value) {
     if(msg.msg=="" || userInp.value==""){
       console.log("Cannot Send Empty Messages")
     }
     else{
-    showChat.innerHTML+=`
-    <div class="bg-blue-200 rounded-md w-32 float-right clear-both mb-5 p-2">
+      showChat.innerHTML+=`
+      <div class="bg-blue-200 rounded-md w-32 float-right clear-both mb-5 p-2">
         <h3 class="">${msg.msg}</h3>
-    </div>    
-    `
-  }
+      </div>    
+      `
+    }
     userInp.value=""
   }
   
   else{
-    let audio = new Audio(audioPath)
-    audio.play()
+    
     showChat.innerHTML+=`
     <div class="bg-blue-200 rounded-md w-32 clear-both mb-5 ">
-        <h3 class="relative top-2">${msg.msg}</h3> <br>
+      <h3 class="relative top-2">${msg.msg}</h3> <br>
     </div>    
     `
+    audioPlay()
     
   }
-  
-  
-  
-
 }
-
+document.addEventListener('DOMContentLoaded', function() {
+  playAudio();
+});
 
   </script>
 </html>
