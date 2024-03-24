@@ -28,7 +28,7 @@
         </div>
       </div>
   </body>
-  <script>
+  <script type="text/javascript">
     
 
 let ws = new WebSocket(`ws://${window.location.host}/ws/sc/jobChat/`)
@@ -95,6 +95,9 @@ ws.onmessage = function(event){
   }
 }
 
+if(performance.navigation.type==1){
+  window.location.href=`http://${window.location.host}/loggedIndex`
+}
   </script>
 </html>
 {% include 'ChatApp/footer.html' %}
