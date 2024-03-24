@@ -35,10 +35,11 @@ ws.onopen = function(){
 let sendBtn = document.querySelector(".submit")
 let userInp = document.querySelector(".text")
 
-
+let audioPath = "{% static 'audio/ting.mp3' %}"
 
 sendBtn.addEventListener('click',function(){
   let val = userInp.value
+
   ws.send(JSON.stringify({
     'msg':val,
   }))
@@ -73,6 +74,8 @@ ws.onmessage = function(event){
         <h3 class="relative top-2">${msg.msg}</h3> <br>
     </div>    
     `
+    let audio = new Audio(audioPath)
+    audio.play()
     
   }
   
