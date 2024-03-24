@@ -69,13 +69,13 @@ ws.onmessage = function(event){
   }
   
   else{
+    let audio = new Audio(audioPath)
+    audio.play()
     showChat.innerHTML+=`
     <div class="bg-blue-200 rounded-md w-32 clear-both mb-5 ">
         <h3 class="relative top-2">${msg.msg}</h3> <br>
     </div>    
     `
-    let audio = new Audio(audioPath)
-    audio.play()
     
   }
   
