@@ -3,8 +3,8 @@
 <!DOCTYPE html>
 <html lang="en" class="">
   <head>
-    <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="UTF-8" />
     <title>ChatApp</title>
     <link rel="stylesheet" href="{% static 'navbar.css' %}" />
     
@@ -16,18 +16,9 @@
     <div class="lg:block border-b-2 hidden overflow-hidden">
       <!-- Apply overflow: hidden to parent div -->
       <nav class="bg-blue-500 text-white flex justify-between px-5 py-5">
-        <h3 class="px-5"><a href="{% url 'home' %}">LiveChat</a></h3>
-        <ul class="flex">
-          <li class="px-9 hover:text-blue-200">
-            <a href="{% url 'safety' %}">Memberships</a>
-          </li>
-          <li class="px-9 hover:text-blue-200">
-            <a href="{% url 'support' %}">We are Hiring ! </a>
-          </li>
-          <li class="px-9 hover:text-blue-200">
-            <a href="{% url 'logout' %}">Logout</a>
-          </li>
-        </ul>
+        
+        <h3 class="px-5 text-center"><a href="{% url 'home' %}">LiveChat</a></h3>
+        
 
           <a href="{% url 'userProfile' %}"><i class="fa-solid fa-user"></i> 
             {% if not form.errors %}
@@ -38,6 +29,10 @@
               Kindly Change Your Username Correctly
             {% endif %}
           </a>
+          <li class="px-9 hover:text-blue-200 list-none">
+            <a href="{% url 'logout' %}">Logout</a>
+          </li>
+        </ul>
       </nav>
     </div>
 
@@ -72,25 +67,13 @@
               Kindly Change Your Username Correctly
             {% endif %}
           </a>    
-          <li class="px-9 hover:text-blue-200">
-            <a href="{% url 'safety' %}">Memberships</a>
-          </li>
-          <li class="px-9 hover:text-blue-200">
-            <a href="{% url 'support' %}">We are Hiring ! </a>
-          </li>
-          <li class="px-9 list-none">
-            <a href="{% url 'userProfile' %}">My Profile</a>
-          </li>
           <li class="px-9 list-none">
             <a href="{% url 'logout' %}">Logout</a>
           </li>
         </ul>
       </div>
     </div>
-    {% comment %} JavaScript For Mobile Responsiveness {% endcomment %}
-
     <script src="{% static 'js/mobileToggle.js' %}"></script>
-
     <script
       src="https://kit.fontawesome.com/255894ee43.js"
       crossorigin="anonymous"

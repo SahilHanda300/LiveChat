@@ -103,7 +103,6 @@ def userProfile(req):
     else:
         user = EditProfile(instance=req.user)
 
-     
     return render(req, "ChatApp/userProfile.html", {"form": user,'user':req.user})
 def logoutWebsite(req):
     logout(req)
