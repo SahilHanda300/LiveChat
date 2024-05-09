@@ -1,0 +1,46 @@
+{% load static %}
+{% load static tailwind_tags %} {% include 'LiveChat/navbar.html' %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    {% tailwind_css %}
+    <title>Document</title>
+  </head>
+  <body class="bg-blue-600">
+    {% for message in messages %}
+    <div class="messages flex justify-center mt-4">
+      <h3 class="bg-green-600 p-3 rounded-md">{{message}}</h3>
+    </div>
+    {% endfor %}
+    <div class="main block my-16 lg:flex justify-around">
+      <div class="text text-center lg:mt-10">
+        <h3 class="text-2xl">It all starts here !</h3>
+        <h3 class="text-xl lg:pt-10">
+          Register Now to start Chatting and Enjoying
+        </h3>
+      </div>
+      <div class="flex justify-around m-5">
+        <form action="" method="post" novalidate>
+          {% csrf_token %} {% for field in form %} {{field.label_tag}}
+          <h5 class="h-5">{{field}}</h5>
+          <h5 class="mt-6">{{field.errors|striptags}}</h5>
+          <br />
+          {% endfor %}
+          <input
+            type="submit"
+            value="Register"
+            class="bg-blue-400 p-1 rounded-lg"
+          />
+          <br />
+          <h5>
+            Already have an account ?
+            <a href="{% url 'login' %}" class="text-blue-400">Login</a>
+          </h5>
+        </form>
+      </div>
+    </div>
+  </body>
+  {% include 'LiveChat/footer.html' %}
+</html>

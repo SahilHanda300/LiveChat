@@ -1,0 +1,28 @@
+{% load static %}
+{% load static tailwind_tags %} {% include 'LiveChat/navbar.html' %}
+<!DOCTYPE html>
+<html lang="en" class="">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="{% static 'main.css' %}">
+    <title>Document</title>
+    {% tailwind_css %}
+  </head>
+  <body class="bg-blue-600 overflow-x-hidden">
+    <div class="main-container">
+      <div class="heading flex items-center flex-col my-20 heading">
+        <h2 class="text-white font-bold text-xl heading">IMAGINE A PLACE...</h2>
+        <h3 class="p-5 italic text-slate-300 text-center font-semibold">
+          <span class="text-2xl"></span>
+        </h3>
+        <h3
+          class="p-5 italic text-slate-300 text-center font-semibold main-text"
+        ></h3>
+      </div>
+    </div>
+
+    <script src="{% static 'js/changeNavbarText.js' %}"></script>
+  </body>
+  {% include 'LiveChat/footer.html' %}
+</html>

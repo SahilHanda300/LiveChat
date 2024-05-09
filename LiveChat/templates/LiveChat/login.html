@@ -1,0 +1,46 @@
+{% load static %}
+{% load static tailwind_tags %} {% include 'LiveChat/navbar.html' %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    {% tailwind_css %}
+    <title>Document</title>
+  </head>
+  <body class="bg-blue-600">
+    <div class="main block lg:flex justify-around mt-10 lg:mt-32 text-xl">
+      <div class="text mx-32 text-center lg:mx-0">
+        <i class="fa-solid fa-user text-5xl"></i>
+        <h3 class="">Login</h3>
+        <h3 class="text-lg">Welcome Back !</h3>
+      </div>
+      
+      <form action="" method="post" novalidate>
+        {% csrf_token %}
+        
+        <div class="flex flex-col items-center mt-4 lg:mt-0">
+        {% if form.non_field_errors %}
+          {% for error in form.non_field_errors %}
+              <h5 class="text-sm text-center">{{error}}</h5>
+          {% endfor %}
+        {% endif %}
+
+
+        {% for field in form %}
+        {{field.label_tag}} <h5 class="h-1">{{field}}</h5> <h5 class="mt-8">{{field.errors|striptags}}</h5> <br> <br>
+        {% endfor %}
+        <input type="submit" value="Login" class="bg-blue-400 p-1 rounded-lg">
+     
+      </div>
+      </form>
+    
+    </div>
+
+    <script
+      src="https://kit.fontawesome.com/255894ee43.js"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+  {% include 'LiveChat/footer.html' %}
+</html>

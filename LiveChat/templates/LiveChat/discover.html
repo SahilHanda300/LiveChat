@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+
+{% load static tailwind_tags %} {% include 'LiveChat/navbar.html' %}
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    {% tailwind_css %}
+  </head>
+  <body class="bg-blue-600">
+    <div class="container">
+      <div
+        class="row1 block text-center lg:flex justify-around mt-7 hover:bg-blue-500"
+      >
+        <div class="text p-6">
+          <h3>Connect Online</h3>
+          <h3>
+            There are lacs of people wandering here and there in this online
+            world <br />
+            Just for a place which gets all their needs together
+          </h3>
+        </div>
+        <img
+          src="{% static 'images/games.png' %}"
+          alt=""
+          class="h-20 m-auto lg:m-0"
+        />
+      </div>
+      <hr class="mt-10" />
+
+      <div
+        class="row1 block text-center lg:flex justify-around mt-7 hover:bg-blue-500"
+      >
+        <img
+          src="{% static 'images/puzzle.png' %}"
+          alt=""
+          class="h-24 m-auto lg:m-0"
+        />
+
+        <div class="text p-6">
+          <h3>Solve Your Queries</h3>
+          <h3>
+            Are you fed up looking for solution of your problem ?
+            <br />
+            This is the place where your hunt ends ! <br />
+            You can post your Queries too !
+          </h3>
+        </div>
+      </div>
+      <hr class="mt-10" />
+
+      <div
+        class="row1 block text-center lg:flex justify-around mt-7 hover:bg-blue-500"
+      >
+        <div class="text p-6">
+          <h3>Connect With Groups</h3>
+          <h3>
+            Connect with several groups which you like ! <br />
+            It is totally free !
+          </h3>
+        </div>
+        <img
+          src="{% static 'images/group.png' %}"
+          alt=""
+          class="h-20 m-auto lg:m-0"
+        />
+      </div>
+      <hr class="mt-10" />
+    </div>
+  </body>
+  {% include 'LiveChat/footer.html' %}
+</html>
