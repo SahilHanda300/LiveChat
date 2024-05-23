@@ -71,6 +71,7 @@ ws.onopen = function(){
 ws.onmessage = function(event){
   let showChat = document.querySelector(".show-chat")
   let msg = JSON.parse(event.data)
+  
   if (msg.msg === userInp.value) {
     if(msg.msg=="" || userInp.value==""){
       console.log("Cannot Send Empty Messages")
