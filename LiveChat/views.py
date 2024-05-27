@@ -116,8 +116,8 @@ def jobChat(req):
     
     return render(req,"LiveChat/jobChat.html")
 
-def vehicalChat(req):
-    return render(req,"LiveChat/vehicalChat.html")
+def vehicleChat(req):
+    return render(req,"LiveChat/vehicleChat.html")
 
 def writers(req):
     return render(req,"LiveChat/writers.html")

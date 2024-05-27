@@ -10,29 +10,36 @@
     {% tailwind_css %}
   </head>
   <style>
-  
+    
   </style>
   <body>
-      <div class="container flex flex-col items-center">
-        <div class="show-chat h-[32rem] w-full bg-blue-700 overflow-y-auto ">
-            <input type="hidden" name="" value="{{request.user}}" class="myClass">
-        </div>
-        <div class="input w-full text-center mt-5">
-          <input type="text" name="" id="" class="h-3/6 w-full text-center text" placeholder="Type Something..">
-        </div>
-        
-        <input type="button" value="Send Message" class=" p-1 bg-blue-500 rounded-lg submit mt-2" >
-    
-        <div class="mt-2 p-10">
-          <a href="{% url 'loggedIndex' %}">Go Back</a>
-        </div>
+    <div class="main w-full h-[50vh] bg-blue-900 overflow-auto">
+      <div class="outgoing-chat ">
+      <div class="show-chat w-full h-full flex flex-col">
+      
       </div>
+    </div>
+  </div>
+</div>
+
+<div class="input-main text-center">
+<div class="input w-full text-center mt-5">
+  <input type="text" name="" id="" class="h-3/6 w-full text-center text" placeholder="Type Something..">
+</div>
+
+<input type="button" value="Send Message" class="p-1 bg-blue-500 rounded-lg submit mt-2">
+
+<div class="mt-2 p-10">
+  <a href="{% url 'loggedIndex' %}">Go Back</a>
+
+</div>
+</div>
   </body>
   <script type="text/javascript">
     
 
 let ws = new WebSocket(`ws://${window.location.host}/ws/sc/jobChat/`);
-let test = document.querySelector(".myClass").value;
+let test = document.querySelector(".text").value;
 console.log(test)
 ws.onopen = function(){
   
@@ -71,26 +78,29 @@ ws.onopen = function(){
 ws.onmessage = function(event){
   let showChat = document.querySelector(".show-chat")
   let msg = JSON.parse(event.data)
-  
   if (msg.msg === userInp.value) {
-    if(msg.msg=="" || userInp.value==""){
-      console.log("Cannot Send Empty Messages")
-    }
-    else{
-      showChat.innerHTML+=`
-      <div class="bg-blue-200 rounded-md w-32 float-right clear-both mb-5 p-2">
-        <h3 class="">${msg.msg}</h3>
-       
-      </div>    
-      `
-    }
-    userInp.value=""
-  }
+    if (msg.msg === "" || userInp.value === "") {
+      console.log("Cannot Send Empty Messages");
+  } else {
+      // Create a new chat bubble element
+      const newChat = document.createElement('div');
+      newChat.className="flex justify-end";
+      newChat.innerHTML = `
+          <div class="bg-blue-200 rounded-md clear-both mb-5 p-2 w-52 flex justify-end">
+              <h3 class="">${msg.msg}</h3>
+          </div>`;
   
+     
+      showChat.appendChild(newChat);
+          
+      
+      userInp.value = "";
+  }
+}
   else{
     
     showChat.innerHTML+=`
-    <div class="bg-blue-200 rounded-md w-32 clear-both mb-5 ">
+    <div class="bg-blue-200 rounded-md w-52 w-32 clear-both mb-5 ">
       <h3 class="relative top-2">${msg.msg}</h3> <br>
      
     </div>    

@@ -10,7 +10,10 @@
     {% tailwind_css %}
   </head>
   <body>
-    <h3 class="text-center lg:text-lg">Chat Groups</h3>
+    <h3 class=" text-center lg:text-lg">Chat Groups</h3> 
+    <div class="main flex justify-center">
+    <div class="chat-groups text-center">
+  </div>
     <div class="container block lg:grid grid-cols-3 text-center text-5xl gap-44 mt-4">
       <div class="lg:mt-0">
       <a href="{% url 'multimedia' %}">🎥</a>
@@ -19,7 +22,7 @@
       <a href="{% url 'jobChat' %}">🙋‍♂️</a>
     </div>
       <div class="mt-12 lg:mt-0 ">
-      <a href="{% url 'vehicalChat' %}">🚗</a>
+      <a href="{% url 'vehicleChat' %}">🚗</a>
     </div>
     <div class="mt-12 lg:mt-0 ">
       <a href="{% url 'writers' %}">🖋️</a>
@@ -30,9 +33,7 @@
     <div class="mt-12 lg:mt-0 ">
       <a href="{% url 'bodyBuilding' %}">💪</a>
     </div>
-    <div class="mt-12 lg:mt-0 ">
-      <a href="{% url 'multimedia' %}">💾</a>
-    </div>
+   
     <div class="mt-12 lg:mt-0 ">
       <a href="{% url 'medico' %}">💉</a> 
     </div>
@@ -41,6 +42,7 @@
     </div>
     </div>
     
+  </div>
   </body>
 </html>
 {% include 'LiveChat/footer.html' %}

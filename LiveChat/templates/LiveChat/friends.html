@@ -9,83 +9,110 @@
     <title>Document</title>
     {% tailwind_css %}
   </head>
-  <body>
-      <div class="container flex flex-col items-center">
-        <div class="show-chat h-[32rem] w-full bg-blue-700 overflow-y-auto ">
-  
-        </div>
-        <div class="input w-full text-center mt-5">
-          <input type="text" name="" id="" class="h-3/6 w-full text-center text" placeholder="Type Something..">
-        </div>
-        <input type="button" value="Send Message" class=" p-1 bg-blue-500 rounded-lg submit mt-2">
+  <style>
     
-        <div class="mt-2 p-10">
-          <a href="{% url 'loggedIndex' %}">Go Back</a>
-        </div>
+  </style>
+  <body>
+    <div class="main w-full h-[50vh] bg-blue-900 overflow-auto">
+      <div class="outgoing-chat ">
+      <div class="show-chat w-full h-full flex flex-col">
+      
       </div>
+    </div>
+  </div>
+</div>
+
+<div class="input-main text-center">
+<div class="input w-full text-center mt-5">
+  <input type="text" name="" id="" class="h-3/6 w-full text-center text" placeholder="Type Something..">
+</div>
+
+<input type="button" value="Send Message" class="p-1 bg-blue-500 rounded-lg submit mt-2">
+
+<div class="mt-2 p-10">
+  <a href="{% url 'loggedIndex' %}">Go Back</a>
+
+</div>
+</div>
   </body>
-  <script>
+  <script type="text/javascript">
     
 
-    let ws = new WebSocket(`ws://${window.location.host}/ws/sc/friends/`)
-    let audio = new Audio()
-    audio.src = "{% static 'audio/ting.mp3' %}"
-    
-    ws.onopen = function(){
-      audio.preload="auto"
-    }
-    let sendBtn = document.querySelector(".submit")
-    let userInp = document.querySelector(".text")
-    
-   
-    sendBtn.addEventListener('click',function(){
-      let val = userInp.value
-      ws.send(JSON.stringify({
-        'msg':val,
-      }))
-      
-    })
-    
-    async function playAudio(){
-      try{
-      await audio.play()
-    } catch(err){
-      console.log("Audio Error : ",err)
-    }
+let ws = new WebSocket(`ws://${window.location.host}/ws/sc/friends/`);
+let test = document.querySelector(".text").value;
+console.log(test)
+ws.onopen = function(){
+  
+}
+let sendBtn = document.querySelector(".submit")
+let userInp = document.querySelector(".text")
+
+let audioPath = "{% static 'audio/ting.mp3' %}"
+
+sendBtn.addEventListener('click',function(){
+  let val = userInp.value
+
+  ws.send(JSON.stringify({
+    'msg':val,
+  }))
+  
+})
+
+let audio = new Audio()
+audio.src = audioPath;
+
+
+
+async function audioPlay(){
+  try{
+  await audio.play()
+  } catch(err){
+    console.log("Audio error : ",err)
   }
-    
-    
-    ws.onmessage = function(event){
-      let showChat = document.querySelector(".show-chat")
-      let msg = JSON.parse(event.data)
-    
-      if (msg.msg === userInp.value) {
-        if(msg.msg=="" || userInp.value==""){
-          console.log("Cannot Send Empty Messages")
-        }
-        else{
-        showChat.innerHTML+=`
-        <div class="bg-blue-200 rounded-md w-32 float-right clear-both mb-5 p-2">
-            <h3 class="">${msg.msg}</h3>
-        </div>    
-        `
-      }
-        userInp.value=""
-      }
+}
+
+
+ws.onopen = function(){
+  audio.preload="auto"
+}
+ws.onmessage = function(event){
+  let showChat = document.querySelector(".show-chat")
+  let msg = JSON.parse(event.data)
+  if (msg.msg === userInp.value) {
+    if (msg.msg === "" || userInp.value === "") {
+      console.log("Cannot Send Empty Messages");
+  } else {
+      // Create a new chat bubble element
+      const newChat = document.createElement('div');
+      newChat.className="flex justify-end";
+      newChat.innerHTML = `
+          <div class="bg-blue-200 rounded-md clear-both mb-5 p-2 w-52 flex justify-end">
+              <h3 class="">${msg.msg}</h3>
+          </div>`;
+  
+     
+      showChat.appendChild(newChat);
+          
       
-      else{
-        showChat.innerHTML+=`
-        <div class="bg-blue-200 rounded-md w-32 clear-both mb-5 ">
-            <h3 class="relative top-2">${msg.msg}</h3> <br>
-        </div>    
-        `
-        playAudio()
-      }
-    }
+      userInp.value = "";
+  }
+}
+  else{
     
-     if(performance.navigation.type==1){
-      window.location.href=`http://${window.location.host}/loggedIndex`
-     }
-      </script>
+    showChat.innerHTML+=`
+    <div class="bg-blue-200 rounded-md w-52 w-32 clear-both mb-5 ">
+      <h3 class="relative top-2">${msg.msg}</h3> <br>
+     
+    </div>    
+    `
+    audioPlay()
+    
+  }
+}
+
+if(performance.navigation.type==1){
+  window.location.href=`http://${window.location.host}/loggedIndex`
+}
+  </script>
 </html>
 {% include 'LiveChat/footer.html' %}
