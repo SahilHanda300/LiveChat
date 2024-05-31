@@ -4,9 +4,7 @@ from django.shortcuts import render
 from django.contrib import messages
 from LiveChat.models import SupportForm
 from django.core.mail import send_mail
-from django.contrib.auth.models import User
-from django.contrib.auth import authenticate,login,logout,update_session_auth_hash
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth import authenticate,login,logout
 from django.contrib.auth.forms import AuthenticationForm , PasswordChangeForm , UserChangeForm
 from .forms import RegisterForm , EditProfile 
 
