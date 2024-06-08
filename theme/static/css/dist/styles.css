@@ -801,10 +801,6 @@ select {
   float: right;
 }
 
-.float-left {
-  float: left;
-}
-
 .clear-both {
   clear: both;
 }
@@ -945,6 +941,10 @@ select {
   width: 8rem;
 }
 
+.w-36 {
+  width: 9rem;
+}
+
 .w-52 {
   width: 13rem;
 }
@@ -955,18 +955,6 @@ select {
 
 .w-full {
   width: 100%;
-}
-
-.w-48 {
-  width: 12rem;
-}
-
-.w-24 {
-  width: 6rem;
-}
-
-.w-36 {
-  width: 9rem;
 }
 
 .translate-x-full {
@@ -1166,6 +1154,11 @@ select {
 .text-xs {
   font-size: 0.75rem;
   line-height: 1rem;
+}
+
+.text-base {
+  font-size: 1rem;
+  line-height: 1.5rem;
 }
 
 .font-bold {
