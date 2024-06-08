@@ -40,23 +40,29 @@
 
 let ws = new WebSocket(`ws://${window.location.host}:8000/ws/sc/medico/`);
 let test = document.querySelector(".text").value;
-console.log(test)
 ws.onopen = function(){
   
 }
+
+
+
+
 let sendBtn = document.querySelector(".submit")
 let userInp = document.querySelector(".text")
 
 let audioPath = "{% static 'audio/ting.mp3' %}"
-
+let user = "{{request.user}}";
 sendBtn.addEventListener('click',function(){
   let val = userInp.value
 
   ws.send(JSON.stringify({
     'msg':val,
+    'token':user,
   }))
   
 })
+
+
 
 let audio = new Audio()
 audio.src = audioPath;
@@ -78,6 +84,9 @@ ws.onopen = function(){
 ws.onmessage = function(event){
   let showChat = document.querySelector(".show-chat")
   let msg = JSON.parse(event.data)
+
+
+
   if (msg.msg === userInp.value) {
     if (msg.msg === "" || userInp.value === "") {
       console.log("Cannot Send Empty Messages");
@@ -86,13 +95,18 @@ ws.onmessage = function(event){
       const newChat = document.createElement('div');
       newChat.className="flex justify-end";
       newChat.innerHTML = `
-          <div class="bg-blue-200 rounded-md clear-both mb-5 p-2 w-52 flex justify-end">
+      <div class="bg-blue-200 rounded-md float-right mb-5">
+        <span class="text-xs float-right">${msg.token} Sent : </span>
+        <div class="bg-blue-200 rounded-md clear-both  p-2 w-36  flex justify-end">
+              
               <h3 class="">${msg.msg}</h3>
-          </div>`;
-  
+              
+              </div>
+         </div>     
+              `;
      
       showChat.appendChild(newChat);
-          
+      
       
       userInp.value = "";
   }
@@ -101,6 +115,7 @@ ws.onmessage = function(event){
     
     showChat.innerHTML+=`
     <div class="bg-blue-200 rounded-md w-52 w-32 clear-both mb-5 ">
+      <span class="text-xs float-right">${msg.token} Sent : </span>
       <h3 class="relative top-2">${msg.msg}</h3> <br>
      
     </div>    

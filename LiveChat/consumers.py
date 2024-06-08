@@ -11,13 +11,15 @@ class ChatAppConsumer(AsyncConsumer):
          
          await self.channel_layer.group_send(self.group,{
              'type':'chat.messages',
-             'message':event['text']
+             'message':event['text'],
+            
          })
     async def chat_messages(self,event):
         await self.send({
             'type':'websocket.send',
             'text':event['message'],
         })
+        
         
     async def websocket_disconnect(self,event):
         await self.send({
