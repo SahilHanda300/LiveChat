@@ -38,7 +38,7 @@
   <script type="text/javascript">
     
 
-let ws = new WebSocket(`ws://${window.location.host}/ws/sc/friends/`);
+let ws = new WebSocket(`ws://${window.location.host}:8000/ws/sc/friends/`);
 let test = document.querySelector(".text").value;
 console.log(test)
 ws.onopen = function(){
