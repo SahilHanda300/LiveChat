@@ -35,99 +35,11 @@
 </div>
 </div>
   </body>
-  <script type="text/javascript">
-    
+  <script type="module">
+    import webSocketFunction from "{% static 'js/webSocket.js' %}";
+    let audio = "{% static 'audio/ting.mp3' %}";
 
-let ws = new WebSocket(`ws://${window.location.host}:8000/ws/sc/writers/`);
-let test = document.querySelector(".text").value;
-ws.onopen = function(){
-  
-}
-
-
-
-
-let sendBtn = document.querySelector(".submit")
-let userInp = document.querySelector(".text")
-
-let audioPath = "{% static 'audio/ting.mp3' %}"
-let user = "{{request.user}}";
-sendBtn.addEventListener('click',function(){
-  let val = userInp.value
-
-  ws.send(JSON.stringify({
-    'msg':val,
-    'token':user,
-  }))
-  
-})
-
-
-
-let audio = new Audio()
-audio.src = audioPath;
-
-
-
-async function audioPlay(){
-  try{
-  await audio.play()
-  } catch(err){
-    console.log("Audio error : ",err)
-  }
-}
-
-
-ws.onopen = function(){
-  audio.preload="auto"
-}
-ws.onmessage = function(event){
-  let showChat = document.querySelector(".show-chat")
-  let msg = JSON.parse(event.data)
-
-
-
-  if (msg.msg === userInp.value) {
-    if (msg.msg === "" || userInp.value === "") {
-      console.log("Cannot Send Empty Messages");
-  } else {
-      // Create a new chat bubble element
-      const newChat = document.createElement('div');
-      newChat.className="flex justify-end";
-      newChat.innerHTML = `
-      <div class="bg-blue-200 rounded-md float-right mb-5" style="margin-top:4px; margin-right:10px;padding:4px">
-        <span class="text-xs float-right">${msg.token} Sent : </span>
-        <div class="bg-blue-200 rounded-md clear-both  p-2 w-36  flex justify-end">
-              
-              <h3 class="">${msg.msg}</h3>
-              
-              </div>
-         </div>     
-              `;
-     
-      showChat.appendChild(newChat);
-      
-      
-      userInp.value = "";
-  }
-}
-  else{
-    
-    showChat.innerHTML+=`
-    <div class="bg-blue-200 rounded-md w-52 w-32 clear-both mb-5 " style='margin-top:4px;margin-left:10px;padding:4px'>
-      <span class="text-xs float-right">${msg.token} Sent : </span>
-      <h3 class="relative top-2">${msg.msg}</h3> <br>
-     
-    </div>    
-    `
-    audioPlay()
-    
-  }
-}
-
-if(performance.navigation.type==1){
-  window.location.href=`http://${window.location.host}/loggedIndex`
-}
+    webSocketFunction("writers","{{request.user|escapejs}}",audio);
   </script>
 </html>
 {% include 'LiveChat/footer.html' %}
